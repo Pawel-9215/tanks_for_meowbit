@@ -56,6 +56,16 @@ class Renderer():
 	def render_bg(self):
 		screen.fill(self.bg_color)
 		
+	def include(self, sprite, layer):
+		if layer == 1:
+			self.renderables_l1.append(sprite)
+		elif layer == 2:
+			self.renderables_l2.append(sprite)
+		elif layer == 3:
+			self.renderables_l3.append(sprite)
+		else:
+			raise ValueError
+		
 	def render_grass(self):
 		
 		for i in range(self.grass_amount):
@@ -85,6 +95,50 @@ class Updater():
 	def update(self):
 		for obj in self.updatables:
 			obj.update()
+			
+class Cell(Node2d):
+	def __init__(self, wx, wy):
+		self.wx = wx
+		self.wy = wy
+		super().__init__(wx*16, wy*16)
+		
+		self.content = []
+		
+		
+	def populate(self, cargo):
+		self.content.append(cargo)
+		
+	def empty_cell(self):
+		self.content.clear()
+		
+class Grid():
+	def __init__():
+		self.cells = []
+		
+	def populate_grid(self):
+		for x in range(10):
+			self.cells.append([])
+			for y in range(8):
+				self.cells[x].append(Cell(x,y))
+			
+class Tank(Node2d):
+	def __init__(self, x, y, img, pal, renderer, updater, direction):
+		super().__init__(x, y)
+		self.sprite = RasImage(self.x, self.y, img, pal)
+		self.direction = direction
+		
+		renderer.include(self.sprite, 3)
+		updater.udpatables.append(self)
+		
+		self.can_move = true
+		
+	def move(self, direction):
+		pass
+		
+		
+	def update(self):
+		pass
+		
 			
 				
 			
