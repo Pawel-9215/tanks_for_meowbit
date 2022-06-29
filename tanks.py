@@ -28,11 +28,12 @@ class Node2d():
 		return (self.x, self.y)
 		
 		
-class RasImage(Node2d):
-	def __init__(self, x, y, image, palette):
-		super().__init__(x, y)
+class RasImage():
+	def __init__(self, image, palette):
 		self.palette = palette
 		self.image = image
+		self.x = 0
+		self.y = 0
 		
 	def render(self):
 		for x, row in enumerate(self.image):
@@ -114,6 +115,7 @@ class Cell(Node2d):
 class Grid():
 	def __init__():
 		self.cells = []
+		self.populate_grid()
 		
 	def populate_grid(self):
 		for x in range(10):
@@ -138,6 +140,13 @@ class Tank(Node2d):
 		
 	def update(self):
 		pass
+		
+class Wall(Node2d):
+	def __init__(self, wx, wy):
+		super().__init__(wx*16, wy*16)
+		self.wx = wx
+		self.wy = wy
+		self.sprite = RasImage(self)
 		
 			
 				

@@ -13,11 +13,7 @@ assets.load_asset("./resources/tank.txt", "tank")
 renderer = Renderer()
 updater = Updater()
 
-my_image = RasImage(0, 0, assets.assets["wall"], assets.palette)
-renderer.renderables_l1.append(my_image)
 
-my_tank = RasImage(16, 0, assets.assets["tank"], assets.palette)
-renderer.renderables_l1.append(my_tank)
 
 while 1:
 	updater.update()
